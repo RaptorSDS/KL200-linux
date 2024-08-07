@@ -3,6 +3,10 @@
 
 g++ -o XKC_KL200 main.cpp XKC_KL200.cpp -std=c++11
 
+
+or makefile 
+
+
 ./XKC_KL200
 
 ##Beispiel

@@ -32,7 +32,7 @@ sudo usermod -a -G dialout $USER
 Verwendung des Bash-Skripts
 Grundlegende Syntax
 BASH
-./xkc_kl200.sh [OPTIONEN] BEFEHL [PARAMETER]
+./xkc_kl200.sh [ OPTIONEN ] BEFEHL [ PARAMETER ]
 Verfügbare Optionen
 Option	Beschreibung	Standardwert
 -p, --port PORT	Serieller Port	/dev/ttyUSB0
@@ -44,7 +44,7 @@ Befehl	Beschreibung	Parameter
 init	Initialisiert den Sensor	-
 read	Führt eine einmalige Distanzmessung durch	-
 monitor	Kontinuierliche Distanzmessung im manuellen Modus	-
-auto	Aktiviert den automatischen Modus und überwacht die Messwerte	[Intervall]
+auto	Aktiviert den automatischen Modus und überwacht die Messwerte	[ Intervall]
 manual	Aktiviert den manuellen Modus	-
 set-led	Setzt den LED-Modus	0-3
 set-interval	Setzt das Upload-Intervall	1-100

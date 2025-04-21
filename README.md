@@ -6,12 +6,14 @@ Funktionen
 •	Konfiguration aller Sensorparameter (LED-Modus, Upload-Intervall, Kommunikationsmodus)
 •	Zurücksetzen auf Werkseinstellungen
 •	Robuste Fehlerbehandlung und Timeout-Mechanismen
+
 Voraussetzungen
 •	Linux-Betriebssystem
 •	Bash-Shell (Version 4.0 oder höher)
 •	Standard-Linux-Tools: stty, cat, dd, hexdump
 •	Serielle Schnittstelle (z.B. USB-zu-UART-Adapter)
 •	Berechtigungen zum Zugriff auf serielle Ports
+
 Installation
 1.	Klonen Sie das Repository:
 BASH
@@ -47,17 +49,22 @@ set-comm-mode	Setzt den Kommunikationsmodus	0 (Relais) oder 1 (UART)
 reset	Setzt den Sensor auf Werkseinstellungen zurück	-
 Beispiele
 Einmalige Distanzmessung
+
 BASH
 ./xkc_kl200.sh read
 Kontinuierliche Distanzmessung
+
 BASH
 ./xkc_kl200.sh monitor
 Automatischen Modus aktivieren
+
 BASH
 ./xkc_kl200.sh auto
 LED-Modus konfigurieren
+
 BASH
 ./xkc_kl200.sh set-led 0  # LED leuchtet bei Erkennung
+
 Konfigurationsparameter
 LED-Modi
 Modus	Beschreibung
@@ -65,24 +72,30 @@ Modus	Beschreibung
 1	LED leuchtet, wenn kein Objekt erkannt wird
 2	LED immer an
 3	LED immer aus
+
 Upload-Intervall
 Das Upload-Intervall im automatischen Modus wird in Einheiten von 100ms angegeben:
 •	Wert 1: 100ms
 •	Wert 10: 1 Sekunde
 •	Wert 100: 10 Sekunden
+
 Kommunikationsmodi
 Modus	Beschreibung
 0	Relais-Modus (Sensor schaltet Relais bei Erkennung)
 1	UART-Modus (Sensor sendet Messwerte über serielle Schnittstelle)
 Fehlerbehebung
+
 Keine Verbindung zum Sensor
 1.	Überprüfen Sie, ob der richtige serielle Port angegeben ist:
+2.	
 BASH
 ls -l /dev/tty*
-2.	Prüfen Sie die Berechtigungen für den seriellen Port:
+3.	Prüfen Sie die Berechtigungen für den seriellen Port:
+4.	
 BASH
 ls -l /dev/ttyUSB0
-3.	Stellen Sie sicher, dass Ihr Benutzer in der Gruppe dialout ist:
+5.	Stellen Sie sicher, dass Ihr Benutzer in der Gruppe dialout ist:
+6.	
 BASH
 groups $USER
 Kommunikationsprobleme
@@ -95,6 +108,7 @@ BASH
 ./xkc_kl200.sh reset
 Technische Details
 Protokoll
+
 Der XKC-KL200 verwendet ein serielles Protokoll mit 9-Byte-Paketen:
 •	Byte 1: Header (0x62)
 •	Byte 2: Befehlscode
@@ -102,6 +116,7 @@ Der XKC-KL200 verwendet ein serielles Protokoll mit 9-Byte-Paketen:
 •	Byte 4-5: Adresse (0xFF, 0xFF)
 •	Byte 6-8: Daten
 •	Byte 9: XOR-Prüfsumme
+
 Befehlscodes
 Code	Beschreibung
 0x33	Distanz lesen
@@ -110,6 +125,7 @@ Code	Beschreibung
 0x37	LED-Modus setzen
 0x39	Zurücksetzen
 0x30	Kommunikationsmodus setzen
+
 Lizenz
 Dieses Projekt steht unter der MIT-Lizenz - siehe die LICENSE Datei für Details.
 Beitragen

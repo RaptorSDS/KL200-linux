@@ -1,38 +1,33 @@
 XKC-KL200 Laser-Abstandssensor Bash-Tool
 Ein Bash-Skript zur Steuerung und Auslese des XKC-KL200-2M-UART Laser-Abstandssensors unter Linux.
-
 Funktionen
-Einmalige und kontinuierliche Distanzmessung
-Unterstützung für manuellen und automatischen Modus
-Konfiguration aller Sensorparameter (LED-Modus, Upload-Intervall, Kommunikationsmodus)
-Zurücksetzen auf Werkseinstellungen
-Robuste Fehlerbehandlung und Timeout-Mechanismen
+•	Einmalige und kontinuierliche Distanzmessung
+•	Unterstützung für manuellen und automatischen Modus
+•	Konfiguration aller Sensorparameter (LED-Modus, Upload-Intervall, Kommunikationsmodus)
+•	Zurücksetzen auf Werkseinstellungen
+•	Robuste Fehlerbehandlung und Timeout-Mechanismen
 Voraussetzungen
-Linux-Betriebssystem
-Bash-Shell (Version 4.0 oder höher)
-Standard-Linux-Tools: stty, cat, dd, hexdump
-Serielle Schnittstelle (z.B. USB-zu-UART-Adapter)
-Berechtigungen zum Zugriff auf serielle Ports
+•	Linux-Betriebssystem
+•	Bash-Shell (Version 4.0 oder höher)
+•	Standard-Linux-Tools: stty, cat, dd, hexdump
+•	Serielle Schnittstelle (z.B. USB-zu-UART-Adapter)
+•	Berechtigungen zum Zugriff auf serielle Ports
 Installation
-Klonen Sie das Repository:
-
+1.	Klonen Sie das Repository:
 BASH
 git clone https://github.com/username/xkc-kl200-bash.git
 cd xkc-kl200-bash
-Machen Sie das Skript ausführbar:
-
+2.	Machen Sie das Skript ausführbar:
 BASH
 chmod +x xkc_kl200.sh
-Stellen Sie sicher, dass Ihr Benutzer Zugriff auf serielle Ports hat:
-
+3.	Stellen Sie sicher, dass Ihr Benutzer Zugriff auf serielle Ports hat:
 BASH
 sudo usermod -a -G dialout $USER
 (Neuanmeldung erforderlich, damit die Änderung wirksam wird)
-
 Verwendung des Bash-Skripts
 Grundlegende Syntax
 BASH
-./xkc_kl200.sh [ OPTIONEN ] BEFEHL [ PARAMETER ]
+./xkc_kl200.sh [OPTIONEN] BEFEHL [PARAMETER]
 Verfügbare Optionen
 Option	Beschreibung	Standardwert
 -p, --port PORT	Serieller Port	/dev/ttyUSB0
@@ -44,7 +39,7 @@ Befehl	Beschreibung	Parameter
 init	Initialisiert den Sensor	-
 read	Führt eine einmalige Distanzmessung durch	-
 monitor	Kontinuierliche Distanzmessung im manuellen Modus	-
-auto	Aktiviert den automatischen Modus und überwacht die Messwerte	[ Intervall]
+auto	Aktiviert den automatischen Modus und überwacht die Messwerte	[Intervall]
 manual	Aktiviert den manuellen Modus	-
 set-led	Setzt den LED-Modus	0-3
 set-interval	Setzt das Upload-Intervall	1-100
@@ -72,49 +67,41 @@ Modus	Beschreibung
 3	LED immer aus
 Upload-Intervall
 Das Upload-Intervall im automatischen Modus wird in Einheiten von 100ms angegeben:
-
-Wert 1: 100ms
-Wert 10: 1 Sekunde
-Wert 100: 10 Sekunden
+•	Wert 1: 100ms
+•	Wert 10: 1 Sekunde
+•	Wert 100: 10 Sekunden
 Kommunikationsmodi
 Modus	Beschreibung
 0	Relais-Modus (Sensor schaltet Relais bei Erkennung)
 1	UART-Modus (Sensor sendet Messwerte über serielle Schnittstelle)
 Fehlerbehebung
 Keine Verbindung zum Sensor
-Überprüfen Sie, ob der richtige serielle Port angegeben ist:
-
+1.	Überprüfen Sie, ob der richtige serielle Port angegeben ist:
 BASH
 ls -l /dev/tty*
-Prüfen Sie die Berechtigungen für den seriellen Port:
-
+2.	Prüfen Sie die Berechtigungen für den seriellen Port:
 BASH
 ls -l /dev/ttyUSB0
-Stellen Sie sicher, dass Ihr Benutzer in der Gruppe dialout ist:
-
+3.	Stellen Sie sicher, dass Ihr Benutzer in der Gruppe dialout ist:
 BASH
 groups $USER
 Kommunikationsprobleme
-Stellen Sie sicher, dass die richtige Baudrate verwendet wird (standardmäßig 9600).
-
-Führen Sie das Skript mit Debugging aus:
-
+1.	Stellen Sie sicher, dass die richtige Baudrate verwendet wird (standardmäßig 9600).
+2.	Führen Sie das Skript mit Debugging aus:
 BASH
 bash -x ./xkc_kl200.sh read
-Setzen Sie den Sensor auf Werkseinstellungen zurück:
-
+3.	Setzen Sie den Sensor auf Werkseinstellungen zurück:
 BASH
 ./xkc_kl200.sh reset
 Technische Details
 Protokoll
 Der XKC-KL200 verwendet ein serielles Protokoll mit 9-Byte-Paketen:
-
-Byte 1: Header (0x62)
-Byte 2: Befehlscode
-Byte 3: Paketlänge (0x09)
-Byte 4-5: Adresse (0xFF, 0xFF)
-Byte 6-8: Daten
-Byte 9: XOR-Prüfsumme
+•	Byte 1: Header (0x62)
+•	Byte 2: Befehlscode
+•	Byte 3: Paketlänge (0x09)
+•	Byte 4-5: Adresse (0xFF, 0xFF)
+•	Byte 6-8: Daten
+•	Byte 9: XOR-Prüfsumme
 Befehlscodes
 Code	Beschreibung
 0x33	Distanz lesen
@@ -125,3 +112,6 @@ Code	Beschreibung
 0x30	Kommunikationsmodus setzen
 Lizenz
 Dieses Projekt steht unter der MIT-Lizenz - siehe die LICENSE Datei für Details.
+Beitragen
+Beiträge sind willkommen! Bitte erstellen Sie einen Pull Request oder öffnen Sie ein Issue, wenn Sie Verbesserungen vorschlagen möchten.
+
